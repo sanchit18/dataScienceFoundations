@@ -196,6 +196,28 @@ def user_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
+def display_raw_data(df):
+    """
+    Displays the data used to compute the stats
+    Input:
+        the dataframe with all the bikeshare data
+    Returns:
+       none
+    """
+
+    df = df.drop(['month', 'day_of_week', 'hour'], axis = 1)
+
+    rowIndex = 0
+
+    displayData = input("\n View Raw Data ? (yes/no) \n").lower()
+
+    while displayData == 'yes':
+
+        print(df[rowIndex: rowIndex + 5])
+        rowIndex = rowIndex + 5
+        displayData = input("\n View 5 more rows of raw data? (yes/no) \n").lower()
+
+
 
 
 def main():
@@ -207,6 +229,7 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
+        display_raw_data(df)
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
